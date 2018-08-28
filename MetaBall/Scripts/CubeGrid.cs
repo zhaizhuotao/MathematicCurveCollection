@@ -130,8 +130,9 @@ public class CubeGrid {
     //
     // Setup
     //
-
+	//width/height/depth都等于40
     private void init() {
+		
         this.instantiateEdgeMap();
         this.instantiatePositionMap();
         this.instantiateGPUPositions();
@@ -139,8 +140,9 @@ public class CubeGrid {
 
         this.initized = true;
     }
-
     private void instantiateEdgeMap() {
+		//edgeMap是-1和1的排列组合
+		//八个顶点相对于中心点的偏移量
         this.edgeMap = new Vector3[] {
             new Vector3(-1, -1, -1),
             new Vector3(1, -1, -1),
@@ -160,7 +162,7 @@ public class CubeGrid {
                 this.edgeMap[i].z / ((float) this.depth));
         }
     }
-
+	//positionMap的取值范围[-0.5,0.5]
     private void instantiatePositionMap() {
         this.positionMap = new Vector3[this.width, this.height, this.depth];
 
@@ -244,7 +246,7 @@ public class CubeGrid {
     //
     // Rest of marching cubes algorithm (on CPU)
     //
-
+	//更新三角形面片的顶点位置
     private void updateVertices2(GPUEdgeVertices vert) {
         int cubeIndex = vert.index;
 

@@ -26,7 +26,7 @@ struct Ball {
 	float3 position;
 };
 
-StructuredBuffer<Positions> positions;
+StructuredBuffer<Positions> positions;//空间网格的每个立方体的中心点和8个顶点的位置
 StructuredBuffer<Ball> metaballs;
 StructuredBuffer<float3> edgeMap;
 
@@ -184,11 +184,12 @@ float metaballFalloffFunction(float factor, float3 dist) {
 	return 8.987551788e9 * factor / sqrt(dist.x * dist.x + dist.y * dist.y + dist.z * dist.z);
 #endif
 }
-
+//判断当前位置的自定义几何体的表面情况
 Values evaluateFieldFunction(int pos) {
 	Values edgeValues = zeroValuesStruct();
 
 	for (int i = 0; i < numMetaballs; i++) {
+	//因为edgePos在一个循环中只出现了8次，所以它应该指的是点
 		float3 dist = positions[pos].edge0Pos - metaballs[i].position;
 		edgeValues.edge0Val += metaballFalloffFunction(metaballs[i].factor, dist);
 
@@ -220,7 +221,7 @@ Values evaluateFieldFunction(int pos) {
 //
 // computer shader kernel
 //
-
+//根据自定义几何体的表面数据，选择对应的cube，并且对cube上的点的位置进行调整，使其能够更好的贴合在几何体表面
 [numthreads(8,8,8)]
 void Calculate(uint3 id : SV_DispatchThreadID) {
 	int pos = id.x + width * (id.y + height * id.z);
