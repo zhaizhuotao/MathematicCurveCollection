@@ -307,7 +307,7 @@ MonoBehaviour:
   resolution: 0.04
   threshold: 1
   computeShader: {fileID: 7200000, guid: 9bcc9560470e2b4439e048851b4c0470, type: 3}
-  calculateNormals: 0
+  calculateNormals: 1
 --- !u!4 &522512122
 Transform:
   m_ObjectHideFlags: 0

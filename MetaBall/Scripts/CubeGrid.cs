@@ -78,7 +78,7 @@ public class CubeGrid {
         
         // magic happens here
         GPUEdgeVertices[] edgeVertices = this.runComputeShader(gpuBalls);
-
+		//根据计算结果，更新所有立方参考体的顶点位置。
         // perform rest of the marching cubes algorithm
         for(int x = 0; x < this.width; x++) {
             for(int y = 0; y < this.height; y++) {
@@ -296,8 +296,8 @@ public class CubeGrid {
     private Vector3[] edgeMap;
     
     private int[][] triTable = {
-        new int[] {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
-        new int[] {0, 8, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+        new int[] {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},//-1代表在边上没有交点
+        new int[] {0, 8, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},//!=-1的序号是点的序号 
         new int[] {0, 1, 9, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
         new int[] {1, 8, 3, 9, 8, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
         new int[] {1, 2, 10, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
